@@ -13,28 +13,29 @@ public class Square {
 
     private boolean discover;
 
-    public Integer getX() {
-        return x;
+    public Square(Integer x, Integer y, Integer value) {
+        this.x = x;
+        this.y = y;
+        this.value = value;
     }
 
-    public void setX(Integer x) {
+    public Square(Integer x, Integer y, Integer value, boolean discover) {
         this.x = x;
+        this.y = y;
+        this.value = value;
+        this.discover = discover;
+    }
+
+    public Integer getX() {
+        return x;
     }
 
     public Integer getY() {
         return y;
     }
 
-    public void setY(Integer y) {
-        this.y = y;
-    }
-
     public Integer getValue() {
         return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
     }
 
     public boolean isDiscover() {
@@ -43,5 +44,25 @@ public class Square {
 
     public void setDiscover(boolean discover) {
         this.discover = discover;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Square)) return false;
+
+        Square square = (Square) o;
+
+        if (x != null ? !x.equals(square.x) : square.x != null) return false;
+        if (y != null ? !y.equals(square.y) : square.y != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x != null ? x.hashCode() : 0;
+        result = 31 * result + (y != null ? y.hashCode() : 0);
+        return result;
     }
 }

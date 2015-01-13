@@ -1,6 +1,7 @@
 package fr.xebia.libon;
 
 import dagger.ObjectGraph;
+import fr.xebia.libon.exceptions.InternalException;
 import fr.xebia.libon.minesweeper.MineSweeper;
 import fr.xebia.libon.minesweeper.MineSweeperModule;
 
@@ -12,7 +13,12 @@ public class Main {
     public static void main(String[] args) {
         ObjectGraph objectGraph = ObjectGraph.create(MineSweeperModule.class);
         MineSweeper mineSweeper = objectGraph.get(MineSweeper.class);
-        mineSweeper.launchGame();
+        try {
+            mineSweeper.launchGame();
+        } catch (InternalException exception) {
+            System.err.print(exception.getMessage());
+            System.exit(1);
+        }
     }
 
 }

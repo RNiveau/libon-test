@@ -8,6 +8,8 @@ import dagger.Module;
 import dagger.Provides;
 import fr.xebia.libon.console.ConsoleManager;
 import fr.xebia.libon.console.api.IConsoleManager;
+import fr.xebia.libon.engine.MineSweeperEngine;
+import fr.xebia.libon.engine.api.IMineSweeperEngine;
 
 import javax.inject.Singleton;
 
@@ -18,6 +20,12 @@ public class MineSweeperModule {
     @Singleton
     public IConsoleManager provideConsoleManager() {
         return new ConsoleManager();
+    }
+
+    @Provides
+    @Singleton
+    public IMineSweeperEngine provideMineSweeperEngine() {
+        return new MineSweeperEngine();
     }
 
 }
