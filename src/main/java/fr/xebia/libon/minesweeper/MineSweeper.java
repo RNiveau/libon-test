@@ -2,6 +2,7 @@ package fr.xebia.libon.minesweeper;
 
 import fr.xebia.libon.console.api.IConsoleManager;
 import fr.xebia.libon.domain.Grid;
+import fr.xebia.libon.domain.Square;
 import fr.xebia.libon.engine.api.IMineSweeperEngine;
 
 import javax.inject.Inject;
@@ -26,11 +27,20 @@ public class MineSweeper {
 
     public void launchGame() {
         String initConfig = consoleManager.initGame();
-
         grid = mineSweeperEngine.createGrid(initConfig);
-        grid = grid;
-
     }
 
 
+    public void runGame() {
+        while (true) {
+            String coordinate = consoleManager.readCoordinate();
+            Square square = mineSweeperEngine.discoverSquare(grid, coordinate);
+            if (square == null) {
+                consoleManager.showError("Bad coordinate, try again");
+            } else if (Square.BOMB_VALUE.equals(square.getValue())) {
+                consoleManager.showInfo("Bomb uncover, game ends");
+                return;
+            }
+        }
+    }
 }

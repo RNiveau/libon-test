@@ -15,8 +15,9 @@ public class Main {
         MineSweeper mineSweeper = objectGraph.get(MineSweeper.class);
         try {
             mineSweeper.launchGame();
+            mineSweeper.runGame();
         } catch (InternalException exception) {
-            System.err.print(exception.getMessage());
+            System.err.println(exception.getMessage());
             System.exit(1);
         }
     }

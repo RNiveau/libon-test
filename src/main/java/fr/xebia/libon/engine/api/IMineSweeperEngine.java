@@ -10,6 +10,13 @@ public interface IMineSweeperEngine {
 
     Grid createGrid(String initConfig);
 
+    /**
+     * Discover a square<br/>
+     * If square has no adjacent bomb, discover adjacent squares
+     * @param grid
+     * @param coordinate
+     * @return
+     */
     Square discoverSquare(Grid grid, String coordinate);
 
 }

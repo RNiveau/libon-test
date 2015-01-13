@@ -5,6 +5,8 @@ package fr.xebia.libon.domain;
  */
 public class Square {
 
+    public static final Integer BOMB_VALUE = -1;
+
     private Coordinate coordinate;
 
     private Integer value;
