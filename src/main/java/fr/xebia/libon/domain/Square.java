@@ -5,33 +5,25 @@ package fr.xebia.libon.domain;
  */
 public class Square {
 
-    private Integer x;
-
-    private Integer y;
+    private Coordinate coordinate;
 
     private Integer value;
 
     private boolean discover;
 
-    public Square(Integer x, Integer y, Integer value) {
-        this.x = x;
-        this.y = y;
+    public Square(Coordinate coordinate, Integer value) {
+        this.coordinate = coordinate;
         this.value = value;
     }
 
-    public Square(Integer x, Integer y, Integer value, boolean discover) {
-        this.x = x;
-        this.y = y;
+    public Square(Coordinate coordinate, Integer value, boolean discover) {
+        this.coordinate = coordinate;
         this.value = value;
         this.discover = discover;
     }
 
-    public Integer getX() {
-        return x;
-    }
-
-    public Integer getY() {
-        return y;
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
     public Integer getValue() {
@@ -53,16 +45,13 @@ public class Square {
 
         Square square = (Square) o;
 
-        if (x != null ? !x.equals(square.x) : square.x != null) return false;
-        if (y != null ? !y.equals(square.y) : square.y != null) return false;
+        if (coordinate != null ? !coordinate.equals(square.coordinate) : square.coordinate != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = x != null ? x.hashCode() : 0;
-        result = 31 * result + (y != null ? y.hashCode() : 0);
-        return result;
+        return coordinate != null ? coordinate.hashCode() : 0;
     }
 }
