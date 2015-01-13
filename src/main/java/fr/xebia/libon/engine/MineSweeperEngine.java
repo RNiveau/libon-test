@@ -6,6 +6,8 @@ import fr.xebia.libon.domain.Square;
 import fr.xebia.libon.engine.api.IMineSweeperEngine;
 import fr.xebia.libon.exceptions.InternalException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -50,9 +52,28 @@ public class MineSweeperEngine implements IMineSweeperEngine {
         return bomb.orElseGet(() -> {
             Optional<Square> square = getSquare(grid, coordinate);
             return square.orElseGet(() -> {
-                return new Square(coordinate, bombAroundSquare(grid, coordinate), true);
+                Square sq = new Square(coordinate, bombAroundSquare(grid, coordinate), true);
+                grid.getSquares().add(sq);
+                return sq;
             });
         });
+    }
+
+    @Override
+    public List<String> encodeGrid(Grid grid) {
+        List<String> stringEncoded = new ArrayList<>();
+        for (int height = 0; height < grid.getHeight(); height++) {
+            String line = "";
+            for (int width = 0; width < grid.getWidth(); width++) {
+                Optional<Square> square = getSquare(grid, new Coordinate(width, height));
+                if (square.isPresent() && square.get().isDiscover())
+                    line += square.get().getValue();
+                else
+                    line += "_";
+            }
+            stringEncoded.add(line);
+        }
+        return stringEncoded;
     }
 
     private Integer bombAroundSquare(Grid grid, Coordinate coordinate) {

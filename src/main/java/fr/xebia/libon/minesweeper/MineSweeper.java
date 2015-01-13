@@ -40,6 +40,8 @@ public class MineSweeper {
             } else if (Square.BOMB_VALUE.equals(square.getValue())) {
                 consoleManager.showInfo("Bomb uncover, game ends");
                 return;
+            } else {
+                mineSweeperEngine.encodeGrid(grid).stream().forEach(line -> consoleManager.showInfo(line));
             }
         }
     }
