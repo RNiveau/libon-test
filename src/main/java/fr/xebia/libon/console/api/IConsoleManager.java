@@ -7,4 +7,10 @@ public interface IConsoleManager {
 
     String initGame();
 
+    String readCoordinate();
+
+    void showError(String error);
+
+    void showInfo(String info);
+
 }

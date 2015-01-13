@@ -19,6 +19,22 @@ public class ConsoleManager implements IConsoleManager {
         return prompt("Give the game configuration (width x height mines-number): ");
     }
 
+    @Override
+    public String readCoordinate() {
+        return prompt("Give a coordinate (x, y): ");
+    }
+
+    @Override
+    public void showError(String error) {
+        System.err.println(error);
+    }
+
+    @Override
+    public void showInfo(String info) {
+        System.out.println(info);
+    }
+
+
     private String prompt(String prompt) {
         Console console = System.console();
         String in;
