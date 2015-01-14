@@ -67,7 +67,7 @@ public class MineSweeperEngine implements IMineSweeperEngine {
     }
 
     @Override
-    public boolean gridComplete(Grid grid) {
+    public boolean gridCompleted(Grid grid) {
         return grid.getSquares().size() == grid.getWidth() * grid.getHeight() - grid.getBombs().size();
     }
 

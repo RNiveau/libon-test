@@ -43,7 +43,7 @@ public class MineSweeper {
             } else {
                 mineSweeperEngine.encodeGrid(grid).stream().forEach(line -> consoleManager.showInfo(line));
             }
-            if (mineSweeperEngine.gridComplete(grid)) {
+            if (mineSweeperEngine.gridCompleted(grid)) {
                 consoleManager.showInfo("All squares are uncovered, you win");
                 break;
             }

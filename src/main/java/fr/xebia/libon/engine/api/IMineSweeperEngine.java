@@ -23,5 +23,5 @@ public interface IMineSweeperEngine {
 
     List<String> encodeGrid(Grid grid);
 
-    boolean gridComplete(Grid grid);
+    boolean gridCompleted(Grid grid);
 }
