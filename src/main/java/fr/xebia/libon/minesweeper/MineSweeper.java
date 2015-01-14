@@ -39,9 +39,13 @@ public class MineSweeper {
                 consoleManager.showError("Bad coordinate, try again");
             } else if (Square.BOMB_VALUE.equals(square.getValue())) {
                 consoleManager.showInfo("Bomb uncover, game ends");
-                return;
+                break;
             } else {
                 mineSweeperEngine.encodeGrid(grid).stream().forEach(line -> consoleManager.showInfo(line));
+            }
+            if (mineSweeperEngine.gridComplete(grid)) {
+                consoleManager.showInfo("All squares are uncovered, you win");
+                break;
             }
         }
     }

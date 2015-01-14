@@ -66,6 +66,11 @@ public class MineSweeperEngine implements IMineSweeperEngine {
         return stringEncoded;
     }
 
+    @Override
+    public boolean gridComplete(Grid grid) {
+        return grid.getSquares().size() == grid.getWidth() * grid.getHeight() - grid.getBombs().size();
+    }
+
     private Square findSquare(Grid grid, Coordinate coordinate) {
         if (!checkValidCoordinate(grid, coordinate))
             return null;
