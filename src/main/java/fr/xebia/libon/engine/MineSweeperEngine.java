@@ -127,11 +127,11 @@ public class MineSweeperEngine implements IMineSweeperEngine {
 
     private Matcher validateInitConfig(String initConfig) {
         if (initConfig == null)
-            throw new InternalException("Bad game configuration, game exits");
+            throw new InternalException("Bad game configuration. Game exits");
         Pattern pattern = Pattern.compile("^ *(\\d+) *x *(\\d+) +(\\d+) *$");
         Matcher matcher = pattern.matcher(initConfig);
         if (!matcher.matches())
-            throw new InternalException("Bad game configuration, game exits");
+            throw new InternalException("Bad game configuration. Game exits");
         return matcher;
     }
 
@@ -154,10 +154,10 @@ public class MineSweeperEngine implements IMineSweeperEngine {
 
     private void checkValidConfiguration(int width, int height, int minesNumber) {
         if (width == 0)
-            throw new InternalException("Bad game configuration, width must be greater than 0 game exits");
+            throw new InternalException("Bad game configuration, width must be greater than 0. Game exits");
         if (height == 0)
-            throw new InternalException("Bad game configuration, height must be greater than 0 game exits");
+            throw new InternalException("Bad game configuration, height must be greater than 0. Game exits");
         if (minesNumber == 0 || (minesNumber > (width * height - 1)))
-            throw new InternalException("Bad game configuration, mines number must be greater than 0 and lesser than squares number game exits");
+            throw new InternalException("Bad game configuration, mines number must be greater than 0 and lesser than squares number. Game exits");
     }
 }
