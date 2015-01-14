@@ -22,4 +22,5 @@ public interface IMineSweeperEngine {
     Square discoverSquare(Grid grid, String coordinate);
 
     List<String> encodeGrid(Grid grid);
+
 }

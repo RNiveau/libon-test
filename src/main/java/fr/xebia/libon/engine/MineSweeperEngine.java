@@ -46,17 +46,7 @@ public class MineSweeperEngine implements IMineSweeperEngine {
         if (matcher == null)
             return null;
         Coordinate coordinate = new Coordinate(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
-        if (!checkValidCoordinate(grid, coordinate))
-            return null;
-        Optional<Square> bomb = getBomb(grid, coordinate);
-        return bomb.orElseGet(() -> {
-            Optional<Square> square = getSquare(grid, coordinate);
-            return square.orElseGet(() -> {
-                Square sq = new Square(coordinate, bombAroundSquare(grid, coordinate), true);
-                grid.getSquares().add(sq);
-                return sq;
-            });
-        });
+        return findSquare(grid, coordinate);
     }
 
     @Override
@@ -74,6 +64,26 @@ public class MineSweeperEngine implements IMineSweeperEngine {
             stringEncoded.add(line);
         }
         return stringEncoded;
+    }
+
+    private Square findSquare(Grid grid, Coordinate coordinate) {
+        if (!checkValidCoordinate(grid, coordinate))
+            return null;
+        Optional<Square> bomb = getBomb(grid, coordinate);
+        return bomb.orElseGet(() -> {
+            Optional<Square> square = getSquare(grid, coordinate);
+            return square.orElseGet(() -> {
+                Square sq = new Square(coordinate, bombAroundSquare(grid, coordinate), true);
+                grid.getSquares().add(sq);
+                if (sq.getValue() == 0) {
+                    findSquare(grid, new Coordinate(coordinate.getX() + 1, coordinate.getY()));
+                    findSquare(grid, new Coordinate(coordinate.getX(), coordinate.getY() + 1));
+                    findSquare(grid, new Coordinate(coordinate.getX() - 1, coordinate.getY()));
+                    findSquare(grid, new Coordinate(coordinate.getX(), coordinate.getY() - 1));
+                }
+                return sq;
+            });
+        });
     }
 
     private Integer bombAroundSquare(Grid grid, Coordinate coordinate) {
@@ -96,7 +106,7 @@ public class MineSweeperEngine implements IMineSweeperEngine {
     }
 
     private boolean checkValidCoordinate(Grid grid, Coordinate coordinate) {
-        return coordinate.getX() < grid.getWidth() && coordinate.getY() < grid.getHeight();
+        return coordinate.getX() < grid.getWidth() && coordinate.getY() < grid.getHeight() && coordinate.getX() >= 0 && coordinate.getY() >= 0;
     }
 
     private Matcher validateCoordinate(String coordinate) {
